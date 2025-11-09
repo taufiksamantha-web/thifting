@@ -13,7 +13,8 @@ import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import StaticPage from './pages/StaticPage';
 import AdminLayout from './components/admin/AdminLayout';
 import TrackOrderModal from './components/TrackOrderModal';
-import QuickViewModal from './components/QuickViewModal'; // Import new component
+import QuickViewModal from './components/QuickViewModal';
+import FloatingCartButton from './components/FloatingCartButton';
 
 type Page = 'home' | 'productList' | 'productDetail' | 'cart' | 'checkout' | 'orderConfirmation' | 'staticPage';
 
@@ -248,15 +249,18 @@ const App: React.FC = () => {
                 categories={categories}
                 onSelectCategory={handleSelectCategory}
                 onNavigateHome={handleNavigateHome}
-                onNavigateToCart={handleNavigateToCart}
                 onToggleView={() => setIsAdminView(true)}
                 onTrackOrder={() => setIsTrackOrderModalOpen(true)}
-                cartItemCount={cartItems.length}
             />
             <main className="flex-grow">
                 {renderPage()}
             </main>
             <Footer categories={categories} onSelectCategory={handleSelectCategory} onNavigateToStaticPage={handleNavigateToStaticPage} />
+
+            {!isAdminView && (
+                <FloatingCartButton cartItemCount={cartItems.length} onClick={handleNavigateToCart} />
+            )}
+
             {isTrackOrderModalOpen && <TrackOrderModal orders={orders} onClose={() => setIsTrackOrderModalOpen(false)} />}
             {quickViewProduct && (
                 <QuickViewModal 

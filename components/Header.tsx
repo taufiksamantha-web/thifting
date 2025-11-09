@@ -6,13 +6,11 @@ interface HeaderProps {
   categories: Category[];
   onSelectCategory: (category: Category['name'] | 'all') => void;
   onNavigateHome: () => void;
-  onNavigateToCart: () => void;
   onToggleView: () => void;
   onTrackOrder: () => void;
-  cartItemCount: number;
 }
 
-const Header: React.FC<HeaderProps> = ({ categories, onSelectCategory, onNavigateHome, onNavigateToCart, onToggleView, onTrackOrder, cartItemCount }) => {
+const Header: React.FC<HeaderProps> = ({ categories, onSelectCategory, onNavigateHome, onToggleView, onTrackOrder }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -42,12 +40,6 @@ const Header: React.FC<HeaderProps> = ({ categories, onSelectCategory, onNavigat
           {/* Icons */}
           <div className="flex items-center space-x-4">
             <button onClick={onTrackOrder} className="hidden sm:block text-sm font-medium text-text-muted hover:text-accent transition-colors">Lacak Pesanan</button>
-            <button onClick={onNavigateToCart} className="relative text-text-main hover:text-accent transition-colors p-2">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-              {cartItemCount > 0 && (
-                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{cartItemCount}</span>
-              )}
-            </button>
              <button onClick={onToggleView} className="text-text-main hover:text-accent transition-colors p-2" title="Admin View">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
             </button>
