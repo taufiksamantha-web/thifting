@@ -14,6 +14,14 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCategory, onSelectProduct, onAddToCart }) => {
   const newArrivals = [...products].sort((a,b) => b.id - a.id).slice(0, 4);
 
+  // Simulate logic for featured products. In a real app, this would come from analytics.
+  const bestSellingIds = [1, 5, 6, 8];
+  const mostSearchedIds = [2, 9, 7, 4];
+  
+  const bestSellingProducts = products.filter(p => bestSellingIds.includes(p.id));
+  const mostSearchedProducts = products.filter(p => mostSearchedIds.includes(p.id));
+
+
   return (
     <div>
       {/* Hero Section */}
@@ -69,6 +77,30 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCateg
             >
               Lihat Semua Koleksi &rarr;
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Best Selling Section */}
+      <section className="py-20 bg-primary">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-serif text-center text-accent mb-12">Produk Terlaris</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {bestSellingProducts.map(product => (
+              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Most Searched Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-serif text-center text-accent mb-12">Paling Banyak Dicari</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {mostSearchedProducts.map(product => (
+              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} />
+            ))}
           </div>
         </div>
       </section>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Product, Category, Order, StaticPageType } from './types';
 import { PRODUCTS_DATA, CATEGORIES as INITIAL_CATEGORIES, ORDERS_DATA } from './constants';
@@ -193,7 +192,7 @@ const App: React.FC = () => {
                 if (!selectedProduct) return <p>Product not found.</p>;
                 return <ProductDetailPage product={selectedProduct} allProducts={products} onBack={() => handleSelectCategory(selectedProduct.category)} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} onCheckoutNow={(items) => handleCheckout(items)} />;
             case 'cart':
-                return <CartPage cartItems={cartItems} onRemoveItem={handleRemoveFromCart} onCheckout={handleCheckout} onContinueShopping={handleNavigateHome} />;
+                return <CartPage products={products} cartItems={cartItems} onRemoveItem={handleRemoveFromCart} onCheckout={handleCheckout} onContinueShopping={handleNavigateHome} />;
             case 'checkout':
                 return <CheckoutPage items={checkoutItems} onPlaceOrder={handlePlaceOrder} onBackToCart={handleNavigateToCart} />;
             case 'orderConfirmation':

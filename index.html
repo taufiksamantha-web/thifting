@@ -14,12 +14,12 @@
         theme: {
           extend: {
             colors: {
-              'background': '#120D2B', // Deep Space Purple
-              'primary': '#1E1541', // Darker Card Purple
-              'secondary': '#3A2D72', // Muted Purple for borders/dividers
-              'accent': '#EC4899', // Electric Pink (pink-500)
-              'text-main': '#E0DFFF', // Lavender Off-white
-              'text-muted': '#A098D4', // Muted Lavender Gray
+              'background': '#FAF5FF', // Soft Lavender White (purple-50)
+              'primary': '#FFFFFF',    // Pure White for cards
+              'secondary': '#E9D5FF',   // Light Lavender (purple-200) for borders
+              'accent': '#F472B6',     // Soft Pink (pink-400)
+              'text-main': '#581C87',    // Deep Purple (purple-800) for text
+              'text-muted': '#6B7280',   // Neutral Gray (gray-500) for muted text
             },
             fontFamily: {
               sans: ['Poppins', 'sans-serif'],
@@ -40,7 +40,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-gradient-to-br from-background via-purple-900/50 to-pink-900/30 text-text-main">
+  <body class="bg-background text-text-main">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
