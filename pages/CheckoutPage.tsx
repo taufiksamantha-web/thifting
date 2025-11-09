@@ -60,23 +60,23 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ items, onPlaceOrder, onBack
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2">
               <label htmlFor="name" className="block text-sm font-medium text-text-muted mb-1">Nama Lengkap</label>
-              <input type="text" name="name" id="name" value={formState.name} onChange={handleInputChange} className="w-full bg-secondary border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
+              <input type="text" name="name" id="name" value={formState.name} onChange={handleInputChange} className="w-full bg-background border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
             </div>
             <div className="md:col-span-2">
               <label htmlFor="email" className="block text-sm font-medium text-text-muted mb-1">Alamat Email</label>
-              <input type="email" name="email" id="email" value={formState.email} onChange={handleInputChange} className="w-full bg-secondary border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
+              <input type="email" name="email" id="email" value={formState.email} onChange={handleInputChange} className="w-full bg-background border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
             </div>
             <div className="md:col-span-2">
               <label htmlFor="address" className="block text-sm font-medium text-text-muted mb-1">Alamat Lengkap</label>
-              <textarea name="address" id="address" value={formState.address} onChange={handleInputChange} placeholder="Nama Jalan, No. Rumah, RT/RW" rows={3} className="w-full bg-secondary border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
+              <textarea name="address" id="address" value={formState.address} onChange={handleInputChange} placeholder="Nama Jalan, No. Rumah, RT/RW" rows={3} className="w-full bg-background border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
             </div>
             <div>
               <label htmlFor="city" className="block text-sm font-medium text-text-muted mb-1">Kota/Kabupaten</label>
-              <input type="text" name="city" id="city" value={formState.city} onChange={handleInputChange} className="w-full bg-secondary border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
+              <input type="text" name="city" id="city" value={formState.city} onChange={handleInputChange} className="w-full bg-background border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
             </div>
             <div>
               <label htmlFor="zip" className="block text-sm font-medium text-text-muted mb-1">Kode Pos</label>
-              <input type="text" name="zip" id="zip" value={formState.zip} onChange={handleInputChange} className="w-full bg-secondary border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
+              <input type="text" name="zip" id="zip" value={formState.zip} onChange={handleInputChange} className="w-full bg-background border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent" required />
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ items, onPlaceOrder, onBack
             </div>
             <button
               type="submit"
-              className="mt-6 w-full bg-accent text-background font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition-colors"
+              className="mt-6 w-full bg-accent text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition-colors"
             >
               Buat Pesanan
             </button>

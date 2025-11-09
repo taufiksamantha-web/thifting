@@ -26,8 +26,8 @@ const TrackOrderModal: React.FC<TrackOrderModalProps> = ({ orders, onClose }) =>
   };
 
   return (
-    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4">
-      <div className="bg-primary/80 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl w-full max-w-lg p-8 relative">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-primary/80 backdrop-blur-xl border border-secondary/50 rounded-xl shadow-2xl w-full max-w-lg p-8 relative">
         <button onClick={onClose} className="absolute top-4 right-4 text-3xl leading-none text-text-muted hover:text-accent">&times;</button>
         <h2 className="text-2xl font-semibold mb-6 text-accent">Lacak Pesanan Anda</h2>
         
@@ -37,7 +37,7 @@ const TrackOrderModal: React.FC<TrackOrderModalProps> = ({ orders, onClose }) =>
             value={orderId}
             onChange={(e) => setOrderId(e.target.value)}
             placeholder="Masukkan Order ID (e.g., RTV-1001)"
-            className="flex-grow bg-white/50 border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-text-main"
+            className="flex-grow bg-background/50 border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-text-main"
           />
           <button type="submit" className="bg-accent text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition">Lacak</button>
         </form>

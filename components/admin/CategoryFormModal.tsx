@@ -37,8 +37,8 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({ category, onClose
   };
 
   return (
-    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4">
-      <div className="bg-primary/80 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl w-full max-w-lg p-8">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-primary/80 backdrop-blur-xl border border-secondary/50 rounded-xl shadow-2xl w-full max-w-lg p-8">
         <h2 className="text-2xl font-semibold mb-6 text-accent">{category ? 'Edit Kategori' : 'Tambah Kategori Baru'}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -48,13 +48,13 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({ category, onClose
               name="name" 
               value={formState.name} 
               onChange={handleChange} 
-              className="w-full bg-white/50 border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-text-main"
+              className="w-full bg-background/50 border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-text-main"
               // Disable editing name for existing categories to avoid breaking relations
               // A better system would use IDs
               disabled={!!category} 
               required 
             />
-             {category && <p className="text-xs text-amber-600 mt-1">Nama kategori tidak dapat diubah.</p>}
+             {category && <p className="text-xs text-amber-500 mt-1">Nama kategori tidak dapat diubah.</p>}
           </div>
           <div>
             <label htmlFor="image" className="block text-sm font-medium text-text-muted mb-1">URL Gambar</label>
@@ -63,12 +63,12 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({ category, onClose
               name="image" 
               value={formState.image} 
               onChange={handleChange} 
-              className="w-full bg-white/50 border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-text-main" 
+              className="w-full bg-background/50 border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-text-main" 
               required 
             />
           </div>
           <div className="flex justify-end gap-4 pt-6">
-            <button type="button" onClick={onClose} className="bg-secondary text-text-main font-bold py-2 px-4 rounded-md hover:bg-gray-300 transition-colors">Batal</button>
+            <button type="button" onClick={onClose} className="bg-secondary text-text-main font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors">Batal</button>
             <button type="submit" className="bg-accent text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors">Simpan</button>
           </div>
         </form>

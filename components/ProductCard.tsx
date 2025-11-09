@@ -10,7 +10,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct, onAddToCart }) => {
   return (
     <div 
-      className="group relative bg-primary rounded-lg overflow-hidden shadow-md cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+      className="group relative bg-primary rounded-lg overflow-hidden shadow-lg border border-secondary/30 cursor-pointer transition-all duration-300 hover:shadow-accent/20 hover:shadow-2xl hover:-translate-y-1"
       onClick={() => onSelectProduct(product)}
     >
       <div className="aspect-w-3 aspect-h-4">
@@ -20,12 +20,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct, onA
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
       <div className="absolute bottom-0 left-0 p-4 w-full">
-        <h3 className="text-lg font-semibold text-white truncate group-hover:text-indigo-300 transition-colors">{product.name}</h3>
+        <h3 className="text-lg font-semibold text-text-main truncate group-hover:text-pink-400 transition-colors">{product.name}</h3>
         <div className="flex justify-between items-center mt-1">
-          <p className="text-sm text-gray-200">{product.size}</p>
-          <p className="text-md font-bold text-white">Rp{product.price.toLocaleString('id-ID')}</p>
+          <p className="text-sm text-text-muted">{product.size}</p>
+          <p className="text-md font-bold text-text-main">Rp{product.price.toLocaleString('id-ID')}</p>
         </div>
         
         {/* Quick Buy Button - hidden until group hover */}
@@ -37,7 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct, onA
             }
           }}
           disabled={!product.inStock}
-          className="w-full bg-accent text-white font-bold py-2 mt-4 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 disabled:bg-gray-500 disabled:cursor-not-allowed"
+          className="w-full bg-accent text-white font-bold py-2 mt-4 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 disabled:bg-gray-600 disabled:cursor-not-allowed"
         >
           {product.inStock ? 'Beli' : 'Terjual'}
         </button>
