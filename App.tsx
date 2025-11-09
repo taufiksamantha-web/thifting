@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Product, Category, Order, StaticPageType } from './types';
-import { PRODUCTS_DATA, CATEGORIES, ORDERS_DATA } from './constants';
+import { PRODUCTS_DATA, CATEGORIES as INITIAL_CATEGORIES, ORDERS_DATA } from './constants';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -21,6 +21,7 @@ const App: React.FC = () => {
     // STATE MANAGEMENT
     const [products, setProducts] = useState<Product[]>(PRODUCTS_DATA);
     const [orders, setOrders] = useState<Order[]>(ORDERS_DATA);
+    const [categories, setCategories] = useState<Category[]>(INITIAL_CATEGORIES);
     const [isAdminView, setIsAdminView] = useState(false);
     
     // NAVIGATION STATE
@@ -124,12 +125,12 @@ const App: React.FC = () => {
     // ADMIN HANDLERS
     const handleAddProduct = (productData: Partial<Product>) => {
         const newProduct: Product = {
-            id: Math.max(...products.map(p => p.id)) + 1,
+            id: Math.max(...products.map(p => p.id), 0) + 1,
             name: productData.name || 'New Product',
             description: productData.description || '',
             price: productData.price || 0,
             images: ['https://picsum.photos/id/500/800/800'], // Placeholder image
-            category: productData.category || 'Jaket',
+            category: productData.category || categories[0]?.name || 'Uncategorized',
             size: productData.size || 'One Size',
             material: productData.material || 'Unknown',
             condition: productData.condition || 'New',
@@ -152,12 +153,40 @@ const App: React.FC = () => {
     const handleUpdateOrderStatus = (orderId: string, status: Order['status']) => {
         setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status } : o));
     };
+    
+    // CATEGORY HANDLERS
+    const handleAddCategory = (categoryData: Omit<Category, 'id'>) => {
+        // Simple check to prevent duplicate names
+        if (categories.some(c => c.name.toLowerCase() === categoryData.name.toLowerCase())) {
+            alert('Kategori dengan nama tersebut sudah ada.');
+            return;
+        }
+        const newCategory: Category = {
+            ...categoryData
+        };
+        setCategories(prev => [...prev, newCategory]);
+    };
+
+    const handleUpdateCategory = (updatedCategory: Category) => {
+        setCategories(prev => prev.map(c => c.name === updatedCategory.name ? updatedCategory : c));
+    };
+    
+    const handleDeleteCategory = (categoryName: string) => {
+         // Optional: Check if any product is using this category before deleting
+        const isCategoryInUse = products.some(p => p.category === categoryName);
+        if (isCategoryInUse) {
+            alert(`Tidak dapat menghapus kategori "${categoryName}" karena masih digunakan oleh produk.`);
+            return;
+        }
+        setCategories(prev => prev.filter(c => c.name !== categoryName));
+    };
+
 
     // RENDER LOGIC
     const renderPage = () => {
         switch (currentPage) {
             case 'home':
-                return <HomePage products={products} categories={CATEGORIES} onSelectCategory={handleSelectCategory} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} />;
+                return <HomePage products={products} categories={categories} onSelectCategory={handleSelectCategory} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} />;
             case 'productList':
                 return <ProductListPage products={products} category={selectedCategory} onSelectProduct={handleSelectProduct} onNavigateHome={handleNavigateHome} onAddToCart={handleAddToCart} />;
             case 'productDetail':
@@ -174,7 +203,7 @@ const App: React.FC = () => {
             case 'staticPage':
                 return <StaticPage page={staticPageType} onNavigateHome={handleNavigateHome} />;
             default:
-                return <HomePage products={products} categories={CATEGORIES} onSelectCategory={handleSelectCategory} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} />;
+                return <HomePage products={products} categories={categories} onSelectCategory={handleSelectCategory} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} />;
         }
     };
     
@@ -183,16 +212,21 @@ const App: React.FC = () => {
             onToggleView={() => setIsAdminView(false)}
             products={products}
             orders={orders}
+            categories={categories}
             onAddProduct={handleAddProduct}
             onUpdateProduct={handleUpdateProduct}
             onDeleteProduct={handleDeleteProduct}
             onUpdateOrderStatus={handleUpdateOrderStatus}
+            onAddCategory={handleAddCategory}
+            onUpdateCategory={handleUpdateCategory}
+            onDeleteCategory={handleDeleteCategory}
         />;
     }
 
     return (
-        <div className="bg-background text-text-main font-sans min-h-screen flex flex-col">
+        <div className="font-sans min-h-screen flex flex-col">
             <Header 
+                categories={categories}
                 onSelectCategory={handleSelectCategory}
                 onNavigateHome={handleNavigateHome}
                 onNavigateToCart={handleNavigateToCart}

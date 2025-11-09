@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Category } from '../types';
 
 interface HeaderProps {
+  categories: Category[];
   onSelectCategory: (category: Category['name'] | 'all') => void;
   onNavigateHome: () => void;
   onNavigateToCart: () => void;
@@ -11,12 +12,11 @@ interface HeaderProps {
   cartItemCount: number;
 }
 
-const Header: React.FC<HeaderProps> = ({ onSelectCategory, onNavigateHome, onNavigateToCart, onToggleView, onTrackOrder, cartItemCount }) => {
+const Header: React.FC<HeaderProps> = ({ categories, onSelectCategory, onNavigateHome, onNavigateToCart, onToggleView, onTrackOrder, cartItemCount }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const categories: Category['name'][] = ['Jaket', 'Kemeja', 'Celana', 'Aksesori'];
 
   return (
-    <header className="bg-primary shadow-md sticky top-0 z-40">
+    <header className="bg-primary/80 backdrop-blur-lg shadow-sm sticky top-0 z-40 border-b border-secondary/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onNavigateHome, onNav
           <nav className="hidden md:flex space-x-8">
             <button onClick={() => onSelectCategory('Baru Masuk')} className="text-text-main hover:text-accent transition-colors font-medium">Baru Masuk</button>
             {categories.map(cat => (
-              <button key={cat} onClick={() => onSelectCategory(cat)} className="text-text-main hover:text-accent transition-colors font-medium">{cat}</button>
+              <button key={cat.name} onClick={() => onSelectCategory(cat.name)} className="text-text-main hover:text-accent transition-colors font-medium">{cat.name}</button>
             ))}
              <button onClick={() => onSelectCategory('all')} className="text-text-main hover:text-accent transition-colors font-medium">Semua</button>
           </nav>
@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onNavigateHome, onNav
             <button onClick={onNavigateToCart} className="relative text-text-main hover:text-accent transition-colors p-2">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
               {cartItemCount > 0 && (
-                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{cartItemCount}</span>
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{cartItemCount}</span>
               )}
             </button>
              <button onClick={onToggleView} className="text-text-main hover:text-accent transition-colors p-2" title="Admin View">
@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onNavigateHome, onNav
             <nav className="flex flex-col space-y-2">
               <button onClick={() => { onSelectCategory('Baru Masuk'); setIsMenuOpen(false); }} className="text-text-main hover:text-accent transition-colors font-medium p-2 text-left">Baru Masuk</button>
               {categories.map(cat => (
-                <button key={cat} onClick={() => { onSelectCategory(cat); setIsMenuOpen(false); }} className="text-text-main hover:text-accent transition-colors font-medium p-2 text-left">{cat}</button>
+                <button key={cat.name} onClick={() => { onSelectCategory(cat.name); setIsMenuOpen(false); }} className="text-text-main hover:text-accent transition-colors font-medium p-2 text-left">{cat.name}</button>
               ))}
               <button onClick={() => { onSelectCategory('all'); setIsMenuOpen(false); }} className="text-text-main hover:text-accent transition-colors font-medium p-2 text-left">Semua</button>
               <button onClick={() => { onTrackOrder(); setIsMenuOpen(false); }} className="sm:hidden text-text-main hover:text-accent transition-colors font-medium p-2 text-left">Lacak Pesanan</button>

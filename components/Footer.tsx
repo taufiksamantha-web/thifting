@@ -48,6 +48,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateToStaticPage }) => {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-secondary text-center text-text-muted text-sm">
+          {/* Fix: Replaced 'newgetFullYear' with 'new Date().getFullYear()' to get the current year. */}
           <p>&copy; {new Date().getFullYear()} Retrove. All Rights Reserved. A new life for old clothes.</p>
         </div>
       </div>

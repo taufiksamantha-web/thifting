@@ -26,8 +26,8 @@ const TrackOrderModal: React.FC<TrackOrderModalProps> = ({ orders, onClose }) =>
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-      <div className="bg-primary rounded-lg shadow-xl w-full max-w-lg p-8 relative">
+    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4">
+      <div className="bg-primary/80 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl w-full max-w-lg p-8 relative">
         <button onClick={onClose} className="absolute top-4 right-4 text-3xl leading-none text-text-muted hover:text-accent">&times;</button>
         <h2 className="text-2xl font-semibold mb-6 text-accent">Lacak Pesanan Anda</h2>
         
@@ -37,16 +37,16 @@ const TrackOrderModal: React.FC<TrackOrderModalProps> = ({ orders, onClose }) =>
             value={orderId}
             onChange={(e) => setOrderId(e.target.value)}
             placeholder="Masukkan Order ID (e.g., RTV-1001)"
-            className="flex-grow bg-secondary border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent"
+            className="flex-grow bg-white/50 border border-secondary rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-text-main"
           />
-          <button type="submit" className="bg-accent text-background font-bold py-2 px-4 rounded-md hover:bg-opacity-90">Lacak</button>
+          <button type="submit" className="bg-accent text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition">Lacak</button>
         </form>
 
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
         {searchedOrder && (
           <div className="mt-8 border-t border-secondary pt-6">
-            <h3 className="font-semibold text-lg">Status untuk Order <span className="font-mono text-accent">{searchedOrder.id}</span></h3>
+            <h3 className="font-semibold text-lg text-text-main">Status untuk Order <span className="font-mono text-accent">{searchedOrder.id}</span></h3>
             <p className="text-sm text-text-muted mb-4">Pelanggan: {searchedOrder.customerName}</p>
             <OrderStatusTimeline status={searchedOrder.status} />
           </div>

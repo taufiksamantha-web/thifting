@@ -13,7 +13,7 @@ export interface Product {
   description: string;
   price: number;
   images: string[];
-  category: 'Jaket' | 'Kemeja' | 'Celana' | 'Aksesori';
+  category: string;
   size: string;
   sizeDetails?: string;
   material: string;
@@ -24,7 +24,7 @@ export interface Product {
 }
 
 export interface Category {
-  name: 'Jaket' | 'Kemeja' | 'Celana' | 'Aksesori' | 'Baru Masuk';
+  name: string;
   image: string;
 }
 

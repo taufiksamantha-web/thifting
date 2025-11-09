@@ -17,8 +17,8 @@ const OrderDetailModal: React.FC<OrderDetailModalProps> = ({ order, onClose, onU
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-      <div className="bg-primary rounded-lg shadow-xl w-full max-w-2xl p-8 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4">
+      <div className="bg-primary/80 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl w-full max-w-2xl p-8 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-2xl font-semibold text-accent">Detail Pesanan</h2>
@@ -46,7 +46,7 @@ const OrderDetailModal: React.FC<OrderDetailModalProps> = ({ order, onClose, onU
                  <select 
                     value={status} 
                     onChange={(e) => setStatus(e.target.value as Order['status'])}
-                    className="bg-secondary border border-gray-600 rounded-md py-1 px-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                    className="bg-white/50 border border-secondary rounded-md py-1 px-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent text-text-main"
                 >
                     <option value="Pending">Pending</option>
                     <option value="Paid">Paid</option>
@@ -63,20 +63,20 @@ const OrderDetailModal: React.FC<OrderDetailModalProps> = ({ order, onClose, onU
                   {order.items.map(item => (
                       <li key={item.id} className="flex justify-between items-center text-sm">
                           <span className="text-text-muted">{item.name}</span>
-                          <span className="text-text-main">Rp{item.price.toLocaleString('id-ID')}</span>
+                          <span className="text-text-main font-medium">Rp{item.price.toLocaleString('id-ID')}</span>
                       </li>
                   ))}
               </ul>
             </div>
              <div className="border-t border-secondary mt-2 pt-3 flex justify-between font-bold">
-                 <span>Total Pesanan</span>
+                 <span className='text-text-main'>Total Pesanan</span>
                  <span className="text-accent text-lg">Rp{order.total.toLocaleString('id-ID')}</span>
             </div>
         </div>
 
         <div className="mt-8 flex justify-end gap-4">
-            <button onClick={onClose} className="bg-secondary text-text-main font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors">Tutup</button>
-            <button onClick={handleUpdate} className="bg-accent text-background font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors">Update Status</button>
+            <button onClick={onClose} className="bg-secondary text-text-main font-bold py-2 px-4 rounded-md hover:bg-gray-300 transition-colors">Tutup</button>
+            <button onClick={handleUpdate} className="bg-accent text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors">Update Status</button>
         </div>
       </div>
     </div>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,21 +14,12 @@
         theme: {
           extend: {
             colors: {
-              // User Facing Theme
-              'background': '#1a1a1a',
-              'primary': '#2c2c2c',
-              'secondary': '#444444',
-              'accent': '#d4c2a3',
-              'text-main': '#e0e0e0',
-              'text-muted': '#a0a0a0',
-
-              // Admin Dashboard Theme
-              'admin-bg': '#111827', // gray-900
-              'admin-sidebar': '#1F2937', // gray-800
-              'admin-card': '#1F2937', // gray-800
-              'admin-accent': '#3B82F6', // blue-500
-              'admin-text-main': '#F9FAFB', // gray-50
-              'admin-text-muted': '#9CA3AF', // gray-400
+              'background': '#F8F9FA', // Off-white
+              'primary': '#FFFFFF', // White for cards, modals
+              'secondary': '#E9ECEF', // Light gray for borders/dividers
+              'accent': '#4F46E5', // Vibrant Indigo
+              'text-main': '#212529', // Dark Charcoal
+              'text-muted': '#6C757D', // Medium Gray
             },
             fontFamily: {
               sans: ['Poppins', 'sans-serif'],
@@ -50,7 +40,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-background text-text-main">
+  <body class="bg-gradient-to-br from-gray-50 to-indigo-100 text-text-main">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

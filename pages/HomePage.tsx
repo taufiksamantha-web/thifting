@@ -24,7 +24,7 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCateg
           <p className="text-lg text-gray-200 mt-4 max-w-2xl">Discover unique, hand-picked vintage pieces that tell a story. Sustainable fashion for the conscious soul.</p>
           <button 
             onClick={() => onSelectCategory('Baru Masuk')}
-            className="mt-8 bg-accent text-background font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all text-lg"
+            className="mt-8 bg-accent text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all text-lg"
           >
             Shop New Arrivals
           </button>
@@ -39,7 +39,7 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCateg
             {categories.map(category => (
               <div 
                 key={category.name} 
-                className="group relative rounded-lg overflow-hidden cursor-pointer"
+                className="group relative rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-shadow"
                 onClick={() => onSelectCategory(category.name)}
               >
                 <img src={category.image} alt={category.name} className="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-110" />
