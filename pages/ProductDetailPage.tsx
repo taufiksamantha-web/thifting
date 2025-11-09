@@ -10,10 +10,11 @@ interface ProductDetailPageProps {
   onBack: () => void;
   onSelectProduct: (product: Product) => void;
   onAddToCart: (product: Product) => void;
-  onCheckoutNow: (items: Product[]) => void;
+  onCheckoutNow: (product: Product) => void;
+  onQuickView: (product: Product) => void;
 }
 
-const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, allProducts, onBack, onSelectProduct, onAddToCart, onCheckoutNow }) => {
+const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, allProducts, onBack, onSelectProduct, onAddToCart, onCheckoutNow, onQuickView }) => {
   const [selectedImage, setSelectedImage] = useState(product.images[0]);
 
   useEffect(() => {
@@ -97,7 +98,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, allProdu
               <button onClick={() => onAddToCart(product)} className="w-full bg-secondary text-text-main font-bold py-3 px-6 rounded-md hover:bg-opacity-80 transition-colors">
                 Masukkan Keranjang
               </button>
-              <button onClick={() => onCheckoutNow([product])} className="w-full bg-accent text-background font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition-colors">
+              <button onClick={() => onCheckoutNow(product)} className="w-full bg-accent text-background font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition-colors">
                 Beli Sekarang
               </button>
             </div>
@@ -114,7 +115,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, allProdu
           <h2 className="text-2xl font-serif text-center text-accent mb-12">Kamu Mungkin Juga Suka</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedProducts.map(p => (
-              <ProductCard key={p.id} product={p} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} />
+              <ProductCard key={p.id} product={p} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} onQuickView={onQuickView} onCheckoutNow={onCheckoutNow} />
             ))}
           </div>
         </div>

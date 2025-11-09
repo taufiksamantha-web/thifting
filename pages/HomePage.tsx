@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Product, Category } from '../types';
 import ProductCard from '../components/ProductCard';
@@ -9,9 +8,11 @@ interface HomePageProps {
   onSelectCategory: (category: Category['name']) => void;
   onSelectProduct: (product: Product) => void;
   onAddToCart: (product: Product) => void;
+  onQuickView: (product: Product) => void;
+  onCheckoutNow: (product: Product) => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCategory, onSelectProduct, onAddToCart }) => {
+const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCategory, onSelectProduct, onAddToCart, onQuickView, onCheckoutNow }) => {
   const newArrivals = [...products].sort((a,b) => b.id - a.id).slice(0, 4);
 
   // Simulate logic for featured products. In a real app, this would come from analytics.
@@ -43,7 +44,7 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCateg
       <section className="py-20 bg-primary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-serif text-center text-accent mb-12">Jelajahi Kategori</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {categories.map(category => (
               <div 
                 key={category.name} 
@@ -52,8 +53,8 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCateg
               >
                 <img src={category.image} alt={category.name} className="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-2xl font-semibold text-white tracking-wider uppercase">{category.name}</h3>
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
+                  <h3 className="text-xl font-semibold text-white tracking-wider uppercase text-center">{category.name}</h3>
                 </div>
               </div>
             ))}
@@ -67,7 +68,7 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCateg
           <h2 className="text-3xl font-serif text-center text-accent mb-12">Baru Masuk</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {newArrivals.map(product => (
-              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} />
+              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} onQuickView={onQuickView} onCheckoutNow={onCheckoutNow} />
             ))}
           </div>
           <div className="text-center mt-12">
@@ -87,7 +88,7 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCateg
           <h2 className="text-3xl font-serif text-center text-accent mb-12">Produk Terlaris</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {bestSellingProducts.map(product => (
-              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} />
+              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} onQuickView={onQuickView} onCheckoutNow={onCheckoutNow} />
             ))}
           </div>
         </div>
@@ -99,7 +100,7 @@ const HomePage: React.FC<HomePageProps> = ({ products, categories, onSelectCateg
           <h2 className="text-3xl font-serif text-center text-accent mb-12">Paling Banyak Dicari</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {mostSearchedProducts.map(product => (
-              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} />
+              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} onQuickView={onQuickView} onCheckoutNow={onCheckoutNow} />
             ))}
           </div>
         </div>

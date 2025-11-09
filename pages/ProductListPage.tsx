@@ -9,9 +9,11 @@ interface ProductListPageProps {
   onSelectProduct: (product: Product) => void;
   onNavigateHome: () => void;
   onAddToCart: (product: Product) => void;
+  onQuickView: (product: Product) => void;
+  onCheckoutNow: (product: Product) => void;
 }
 
-const ProductListPage: React.FC<ProductListPageProps> = ({ products, category, onSelectProduct, onNavigateHome, onAddToCart }) => {
+const ProductListPage: React.FC<ProductListPageProps> = ({ products, category, onSelectProduct, onNavigateHome, onAddToCart, onQuickView, onCheckoutNow }) => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortOption, setSortOption] = useState('newest');
   const [priceRange, setPriceRange] = useState({ min: '', max: '' });
@@ -141,7 +143,7 @@ const ProductListPage: React.FC<ProductListPageProps> = ({ products, category, o
         viewMode === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {productsToShow.map(product => (
-              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} />
+              <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} onAddToCart={onAddToCart} onQuickView={onQuickView} onCheckoutNow={onCheckoutNow} />
             ))}
           </div>
         ) : (

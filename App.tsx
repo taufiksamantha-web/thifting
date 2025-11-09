@@ -13,6 +13,7 @@ import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import StaticPage from './pages/StaticPage';
 import AdminLayout from './components/admin/AdminLayout';
 import TrackOrderModal from './components/TrackOrderModal';
+import QuickViewModal from './components/QuickViewModal'; // Import new component
 
 type Page = 'home' | 'productList' | 'productDetail' | 'cart' | 'checkout' | 'orderConfirmation' | 'staticPage';
 
@@ -36,6 +37,7 @@ const App: React.FC = () => {
 
     // MODAL STATE
     const [isTrackOrderModalOpen, setIsTrackOrderModalOpen] = useState(false);
+    const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null); // Quick view state
 
     // Persist cart to localStorage
     useEffect(() => {
@@ -74,6 +76,20 @@ const App: React.FC = () => {
         setCurrentPage('staticPage');
     };
 
+    // QUICK VIEW HANDLERS
+    const handleOpenQuickView = (product: Product) => {
+        setQuickViewProduct(product);
+    };
+
+    const handleCloseQuickView = () => {
+        setQuickViewProduct(null);
+    };
+    
+    const handleNavigateToProductDetailFromQuickView = (product: Product) => {
+        handleCloseQuickView();
+        handleSelectProduct(product);
+    };
+
     // CART HANDLERS
     const handleAddToCart = (product: Product) => {
         if (!cartItems.find(item => item.id === product.id)) {
@@ -92,6 +108,10 @@ const App: React.FC = () => {
     const handleCheckout = (items: Product[]) => {
         setCheckoutItems(items);
         setCurrentPage('checkout');
+    };
+    
+    const handleCheckoutNow = (product: Product) => {
+        handleCheckout([product]);
     };
 
     const handlePlaceOrder = (customerDetails: { name: string; email: string; address: string; }) => {
@@ -185,12 +205,12 @@ const App: React.FC = () => {
     const renderPage = () => {
         switch (currentPage) {
             case 'home':
-                return <HomePage products={products} categories={categories} onSelectCategory={handleSelectCategory} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} />;
+                return <HomePage products={products} categories={categories} onSelectCategory={handleSelectCategory} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} onQuickView={handleOpenQuickView} onCheckoutNow={handleCheckoutNow} />;
             case 'productList':
-                return <ProductListPage products={products} category={selectedCategory} onSelectProduct={handleSelectProduct} onNavigateHome={handleNavigateHome} onAddToCart={handleAddToCart} />;
+                return <ProductListPage products={products} category={selectedCategory} onSelectProduct={handleSelectProduct} onNavigateHome={handleNavigateHome} onAddToCart={handleAddToCart} onQuickView={handleOpenQuickView} onCheckoutNow={handleCheckoutNow} />;
             case 'productDetail':
                 if (!selectedProduct) return <p>Product not found.</p>;
-                return <ProductDetailPage product={selectedProduct} allProducts={products} onBack={() => handleSelectCategory(selectedProduct.category)} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} onCheckoutNow={(items) => handleCheckout(items)} />;
+                return <ProductDetailPage product={selectedProduct} allProducts={products} onBack={() => handleSelectCategory(selectedProduct.category)} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} onCheckoutNow={handleCheckoutNow} onQuickView={handleOpenQuickView} />;
             case 'cart':
                 return <CartPage products={products} cartItems={cartItems} onRemoveItem={handleRemoveFromCart} onCheckout={handleCheckout} onContinueShopping={handleNavigateHome} />;
             case 'checkout':
@@ -202,7 +222,7 @@ const App: React.FC = () => {
             case 'staticPage':
                 return <StaticPage page={staticPageType} onNavigateHome={handleNavigateHome} />;
             default:
-                return <HomePage products={products} categories={categories} onSelectCategory={handleSelectCategory} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} />;
+                return <HomePage products={products} categories={categories} onSelectCategory={handleSelectCategory} onSelectProduct={handleSelectProduct} onAddToCart={handleAddToCart} onQuickView={handleOpenQuickView} onCheckoutNow={handleCheckoutNow} />;
         }
     };
     
@@ -236,8 +256,16 @@ const App: React.FC = () => {
             <main className="flex-grow">
                 {renderPage()}
             </main>
-            <Footer onNavigateToStaticPage={handleNavigateToStaticPage} />
+            <Footer categories={categories} onSelectCategory={handleSelectCategory} onNavigateToStaticPage={handleNavigateToStaticPage} />
             {isTrackOrderModalOpen && <TrackOrderModal orders={orders} onClose={() => setIsTrackOrderModalOpen(false)} />}
+            {quickViewProduct && (
+                <QuickViewModal 
+                    product={quickViewProduct} 
+                    onClose={handleCloseQuickView} 
+                    onAddToCart={handleAddToCart} 
+                    onViewFullDetails={handleNavigateToProductDetailFromQuickView} 
+                />
+            )}
         </div>
     );
 };
